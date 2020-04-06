@@ -1,0 +1,99 @@
+import random
+
+theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
+            'mid-L': ' ', 'mid-M': ' ', 'mid-R': ' ',
+            'low-L': ' ', 'low-M': ' ', 'low-R': ' '}
+
+def printboard(board):
+    print(board['top-L'], "|" , board['top-M'], "|", board['top-R'])
+    print("= = = = =")
+    print(board['mid-L'], "|" , board['mid-M'], "|", board['mid-R'])
+    print("= = = = =")
+    print(board['low-L'], "|" , board['low-M'], "|", board['low-R'])
+
+def winner(win):
+    if theBoard['top-L']!=' ' and theBoard['top-R']==theBoard['top-M']==theBoard['top-L']:
+        print(theBoard['top-L'],"is the winner")
+        return True
+    elif theBoard['mid-L']!=' ' and theBoard['mid-R']==theBoard['mid-M']==theBoard['mid-L']:
+        print(theBoard['mid-L'],"is the winner")
+        return True
+    elif theBoard['low-L']!=' ' and theBoard['low-R']==theBoard['low-M']==theBoard['low-L']:
+        print(theBoard['low-L'],"is the winner")
+        return True
+    elif theBoard['top-L']!=' ' and theBoard['mid-L']==theBoard['low-L']==theBoard['top-L']:
+        print(theBoard['top-L'],"is the winner")
+        return True
+    elif theBoard['top-M']!=' ' and theBoard['mid-M']==theBoard['low-M']==theBoard['top-M']:
+        print(theBoard['top-M'],"is the winner")
+        return True
+    elif theBoard['top-R']!=' ' and theBoard['mid-R']==theBoard['low-R']==theBoard['top-R']:
+        print(theBoard['top-R'],"is the winner")
+        return True
+    elif theBoard['top-L']!=' ' and theBoard['mid-M']==theBoard['low-R']==theBoard['top-L']:
+        print(theBoard['top-L'],"is the winner")
+        return True
+    elif theBoard['top-R']!=' ' and theBoard['mid-M']==theBoard['low-L']==theBoard['top-R']:
+        print(theBoard['top-R'],"is the winner")
+        return True
+
+def rotate(xoro):
+        if xoro == 'X':
+            return 'O'
+        else:
+            return 'X'
+
+def game():
+    moves = 9
+    randomer = ['X','O']
+    ran = randomer[random.randint(0,1)]
+    turn = ran
+    for i in range(moves):
+        printboard(theBoard)
+        if winner(theBoard) == True:
+            break
+        print("top-L, top-M, top-R")
+        print("mid-L, mid-M, mid-R")
+        print("low-L, low-M, low-R")
+        print(turn, 'it is your go, what is your move?')
+        move = input()
+        if move == 'top-L':
+            theBoard['top-L']=turn
+            turn = rotate(turn)
+        elif move == 'top-M':
+            theBoard['top-M']=turn
+            turn = rotate(turn)
+        elif move == 'top-R':
+            theBoard['top-R']=turn
+            turn = rotate(turn)
+        elif move == 'mid-L':
+            theBoard['mid-L']=turn
+            turn = rotate(turn)
+        elif move == 'mid-M':
+            theBoard['mid-M']=turn
+            turn = rotate(turn)
+        elif move == 'mid-R':
+            theBoard['mid-R']=turn
+            turn = rotate(turn)
+        elif move == 'low-L':
+            theBoard['low-L']=turn
+            turn = rotate(turn)
+        elif move == 'low-M':
+            theBoard['low-M']=turn
+            turn = rotate(turn)
+        elif move == 'low-R':
+            theBoard['low-R']=turn
+            turn = rotate(turn)
+        else:
+            print("invalid move")
+            moves=moves+1
+while True:
+    print("Do you want to play O & X? Y for yes and N for no")
+    again = input()
+    if again.upper()=='Y':
+        game()
+    elif again.upper()=='N':
+        print("Goodbye")
+        break
+    else:
+        print("invalid input")
